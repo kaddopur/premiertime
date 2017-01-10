@@ -35,24 +35,27 @@ const data = raw.split('\n')
     }, []);
 const keys = getKeys(data);
 const times = keys.reduce((acc, name) => {
-    const totalTime = data
+    const timeForKey = data
         .filter(entry => entry.name === name)
         .map(entry => entry.time)
         .reduce((acculateTime, time) => addTime(acculateTime, time), '0:00');
 
     acc.push({
         name,
-        time: totalTime
+        time: timeForKey
     });
     return acc;
 }, []);
+const totalTime = times.reduce((acc, entry) => addTime(acc, entry.time), '0:00');
 
-console.log(times);
+console.log(times, totalTime);
 
 const outputFd = fs.open('./output.csv', 'w', (err, fd) => {
     times.forEach(entry => {
         fs.write(fd, `${entry.name},${entry.time}\n`, () => {});
     });
+
+    fs.write(fd, `total time,${totalTime}\n`, () => {});
 });
 
 // console.log(data);
