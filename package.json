@@ -1,7 +1,7 @@
 {
-  "name": "time-cal",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "premiertime",
+  "version": "0.1.0",
+  "main": "app.js",
   "license": "MIT",
   "scripts": {
     "test": "jest",
@@ -17,5 +17,13 @@
   },
   "devDependencies": {
     "jest": "^18.1.0"
+  },
+  "authors": [
+    "Jason C. Huang <chaoju.huang@gmail.com> (http://chaojuhuang.com/)",
+    "Yuting Fu <cat3067@gmail.com> (https://github.com/shenevol)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kaddopur/premiertime.git"
   }
 }
