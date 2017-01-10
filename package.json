@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "npm run test -- --watch"
+  },
   "dependencies": {
+    "lodash": "^4.17.4",
     "moment": "^2.17.1"
   },
   "devDependencies": {
