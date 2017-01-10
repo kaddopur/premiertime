@@ -1,6 +1,19 @@
+#!/usr/bin/env node
+
 const _ = require('lodash');
 const moment = require('moment');
 const fs = require('fs');
+const program = require('commander');
+
+program
+    .version('0.0.1')
+    .usage('[options] <file ...>');
+
+program.parse(process.argv);
+
+const inputFileName = program.args[0];
+const matcher = inputFileName.match(/([^\/]*).csv$/);
+const outputFileName = `${matcher[1]}.output.csv`;
 
 function getKeys(data) {
     return _.uniqBy(data, 'name').map(entry => entry.name);
@@ -21,7 +34,7 @@ module.exports = {
     addTime: addTime
 };
 
-const raw = fs.readFileSync('./data.csv').toString();
+const raw = fs.readFileSync(inputFileName).toString();
 const data = raw.split('\n')
     .filter(entry => /^.*,\d+:\d+$/.test(entry))
     .reduce((acc, entry) => {
@@ -50,7 +63,7 @@ const totalTime = times.reduce((acc, entry) => addTime(acc, entry.time), '0:00')
 
 console.log(times, totalTime);
 
-const outputFd = fs.open('./output.csv', 'w', (err, fd) => {
+const outputFd = fs.open(`./${outputFileName}`, 'w', (err, fd) => {
     times.forEach(entry => {
         fs.write(fd, `${entry.name},${entry.time}\n`, () => {});
     });
