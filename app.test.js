@@ -1,5 +1,4 @@
 var app = require('./app');
-var fs = require('fs');
 
 describe('#getKeys', function () {
     it('should handle empty data array', function () {
@@ -43,5 +42,17 @@ describe('#getKeys', function () {
                 time: '1:34'
             },
         ])).toEqual(['dog', 'cat']);
+    });
+});
+
+describe('#addTime', function () {
+    it('should add up two time', function () {
+        expect(app.addTime('0:01', '0:02')).toBe('0:03');
+        expect(app.addTime('0:30', '0:42')).toBe('1:12');
+    });
+
+    it('should not add up to day', function () {
+        expect(app.addTime('23:59', '0:02')).toBe('24:01');
+        expect(app.addTime('24:00', '30:02')).toBe('54:02');
     });
 });
