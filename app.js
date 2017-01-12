@@ -6,7 +6,7 @@ const fs = require('fs');
 const program = require('commander');
 
 program
-    .version('0.1.1')
+    .version('0.1.2')
     .usage('[options] <file ...>');
 
 program.parse(process.argv);
@@ -14,8 +14,6 @@ program.parse(process.argv);
 const inputFileName = program.args[0];
 const matcher = inputFileName.match(/([^\/]*).csv$/);
 const outputFileName = `${matcher[1]}.output.csv`;
-console.log("inputFileName, outputFileName", inputFileName, outputFileName);
-
 
 function getKeys(data) {
     return _.uniqBy(data, 'name').map(entry => entry.name);
@@ -38,8 +36,7 @@ module.exports = {
 
 
 const raw = fs.readFileSync(inputFileName).toString();
-const data = raw.split('\n')
-    .map( entry => entry.trim())
+const data = raw.split(/\s+/)
     .filter( entry => /.*,\d+:\d+/.test(entry))
     .reduce((acc, entry) => {
         const [name, time] = entry.split(',');
@@ -65,7 +62,7 @@ const times = keys.reduce((acc, name) => {
 }, []);
 const totalTime = times.reduce((acc, entry) => addTime(acc, entry.time), '0:00');
 
-console.log("this is times, totalTimes", times, totalTime);
+console.log(times, totalTime);
 
 const outputFd = fs.open(`./${outputFileName}`, 'w', (err, fd) => {
     times.forEach(entry => {
