@@ -15,7 +15,23 @@ function addTime(a, b) {
     return `${hour}:${minute}`;
 }
 
+function parseRaw(raw) {
+    return raw
+        .split(/\s+/)
+        .filter(entry => /.*,\d+:\d+/.test(entry))
+        .reduce((acc, entry) => {
+            const [name, time] = entry.split(',');
+
+            acc.push({
+                name,
+                time
+            });
+            return acc;
+        }, []);
+}
+
 module.exports = {
-    getKeys: getKeys,
-    addTime: addTime
+    getKeys,
+    addTime,
+    parseRaw
 };
