@@ -37,7 +37,7 @@ module.exports = {
 
 const raw = fs.readFileSync(inputFileName).toString();
 const data = raw.split(/\s+/)
-    .filter( entry => /.*,\d+:\d+/.test(entry))
+    .filter(entry => /.*,\d+:\d+/.test(entry))
     .reduce((acc, entry) => {
         const [name, time] = entry.split(',');
 
