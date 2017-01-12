@@ -14,7 +14,6 @@ program.parse(process.argv);
 const inputFileName = program.args[0];
 const matcher = inputFileName.match(/([^\/]*).csv$/);
 const outputFileName = `${matcher[1]}.output.csv`;
-console.log("inputFileName, outputFileName", inputFileName, outputFileName);
 
 
 function getKeys(data) {
