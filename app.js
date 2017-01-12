@@ -6,7 +6,7 @@ const fs = require('fs');
 const program = require('commander');
 
 program
-    .version('0.1.1')
+    .version('0.1.2')
     .usage('[options] <file ...>');
 
 program.parse(process.argv);
@@ -34,8 +34,9 @@ module.exports = {
     addTime: addTime
 };
 
+
 const raw = fs.readFileSync(inputFileName).toString();
-const data = raw.split('\n')
+const data = raw.split(/\s+/)
     .filter(entry => /.*,\d+:\d+/.test(entry))
     .reduce((acc, entry) => {
         const [name, time] = entry.split(',');
