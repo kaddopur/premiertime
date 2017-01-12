@@ -65,7 +65,7 @@ const times = keys.reduce((acc, name) => {
 }, []);
 const totalTime = times.reduce((acc, entry) => addTime(acc, entry.time), '0:00');
 
-console.log("this is times, totalTimes", times, totalTime);
+console.log(times, totalTime);
 
 const outputFd = fs.open(`./${outputFileName}`, 'w', (err, fd) => {
     times.forEach(entry => {
