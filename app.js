@@ -3,9 +3,10 @@
 const fs = require('fs');
 const program = require('commander');
 const { getKeys, addTime } = require('./src/premiertime');
+const { version } = require('./package.json');
 
 program
-    .version('0.1.2')
+    .version(version)
     .usage('[options] <file ...>');
 
 program.parse(process.argv);
