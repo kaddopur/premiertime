@@ -1,12 +1,12 @@
-var app = require('./app');
+var premiertime = require('./premiertime');
 
 describe('#getKeys', function () {
     it('should handle empty data array', function () {
-        expect(app.getKeys([])).toEqual([]);
+        expect(premiertime.getKeys([])).toEqual([]);
     });
 
     it('should return correct keys', function () {
-        expect(app.getKeys([
+        expect(premiertime.getKeys([
             {
                 name: 'dog',
                 time: '3:33'
@@ -15,7 +15,7 @@ describe('#getKeys', function () {
     });
 
     it('should return different keys', function () {
-        expect(app.getKeys([
+        expect(premiertime.getKeys([
             {
                 name: 'dog',
                 time: '3:33'
@@ -28,7 +28,7 @@ describe('#getKeys', function () {
     });
 
     it('should return unique keys', function () {
-        expect(app.getKeys([
+        expect(premiertime.getKeys([
             {
                 name: 'dog',
                 time: '3:33'
@@ -47,12 +47,12 @@ describe('#getKeys', function () {
 
 describe('#addTime', function () {
     it('should add up two time', function () {
-        expect(app.addTime('0:01', '0:02')).toBe('0:03');
-        expect(app.addTime('0:30', '0:42')).toBe('1:12');
+        expect(premiertime.addTime('0:01', '0:02')).toBe('0:03');
+        expect(premiertime.addTime('0:30', '0:42')).toBe('1:12');
     });
 
     it('should not add up to day', function () {
-        expect(app.addTime('23:59', '0:02')).toBe('24:01');
-        expect(app.addTime('24:00', '30:02')).toBe('54:02');
+        expect(premiertime.addTime('23:59', '0:02')).toBe('24:01');
+        expect(premiertime.addTime('24:00', '30:02')).toBe('54:02');
     });
 });
